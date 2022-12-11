@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender</title>
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="../static/styles/recommender.css">
+    <!-- Mulish Font Family -->
+    <link href="https://fonts.cdnfonts.com/css/mulish" rel="stylesheet">
+    <!-- Bootstrap CSS and Javascript -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+</head>
+<body>
+  <section id="nav-bar">
+      <nav class="navbar navbar-expand-lg navbar-light navbar-purple">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><img src="../static/images/logo.png" alt="Meet Cute Logo"></a>
+            <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="recommender.html">Get Recomendation</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="suggestions.html">Suggest a Book</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+  </section>
+  <!--Navigation End-->
+  <!--Hero Start-->
+  <section>
+    <div class="container-fluid px-4 py-5 my-5 text-center">
+      <div class="lc-block d-block mx-auto mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="purple" class="bi bi-arrow-through-heart-fill text-pink" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2.854 15.854A.5.5 0 0 1 2 15.5V14H.5a.5.5 0 0 1-.354-.854l1.5-1.5A.5.5 0 0 1 2 11.5h1.793l3.103-3.104a.5.5 0 1 1 .708.708L4.5 12.207V14a.5.5 0 0 1-.146.354l-1.5 1.5ZM16 3.5a.5.5 0 0 1-.854.354L14 2.707l-1.006 1.006c.236.248.44.531.6.845.562 1.096.585 2.517-.213 4.092-.793 1.563-2.395 3.288-5.105 5.08L8 13.912l-.276-.182A23.825 23.825 0 0 1 5.8 12.323L8.31 9.81a1.5 1.5 0 0 0-2.122-2.122L3.657 10.22a8.827 8.827 0 0 1-1.039-1.57c-.798-1.576-.775-2.997-.213-4.093C3.426 2.565 6.18 1.809 8 3.233c1.25-.98 2.944-.928 4.212-.152L13.292 2 12.147.854A.5.5 0 0 1 12.5 0h3a.5.5 0 0 1 .5.5v3Z"/>
+        </svg>
+      </div>
+      <div class="lc-block">
+        <div editable="rich">
+          <h2 class="display-4 font-weight-bold">It's time for your meet cute!</h2>
+        </div>
+      </div>
+      <div class="lc-block col-lg-6 mx-auto mb-4">
+        <div editable="rich">
+          <p class="lead ">Select a book you've read from the dropdown list to get recommendations on what books you might like to read next.</p>
+        </div>
+      </div>
+      <form method="POST" action="{{url_for('recommend_book')}}">
+        <div class="select-book">
+          <select class="selectpicker" name="book-choice" data-live-search="true">
+            <option>Choose a Book...</option>
+            <option>10 Blind Dates </option>
+            <option>99 Percent Mine </option>
+            <option>A Beautiful Wedding </option>
+            <option>A Bend in the Road </option>
+            <option>A Breath of Snow and Ashes </option>
+            <option>A Brush with Love </option>
+            <option>A Court of Frost and Starlight </option>
+            <option>A Court of Mist and Fury </option>
+            <option>A Court of Thorns and Roses </option>
+            <option>A Court of Wings and Ruin </option>
+            <option>A Curse So Dark and Lonely </option>
+            <option>A Deal with the Elf King </option>
+            <option>A Discovery of Witches </option>
+            <option>A Duke by Default </option>
+            <option>A Girl Like Her </option>
+            <option>A Great and Terrible Beauty </option>
+            <option>A Hunger Like No Other </option>
+            <option>A Kingdom of Dreams </option>
+            <option>A Kingdom of Flesh and Fire </option>
+            <option>A Kiss at Midnight </option>
+            <option>A Kiss for Midwinter </option>
+            <option>A Knight in Shining Armor </option>
+            <option>A Lady by Midnight </option>
+            <option>A Lady for a Duke </option>
+            <option>A Lot Like Adiós </option>
+            <option>A Lot like Love </option>
+            <option>A Marvellous Light </option>
+            <option>A Midsummer Night's Dream </option>
+            <option>A Night Like This </option>
+            <option>A Night to Surrender </option>
+            <option>A Not So Meet Cute </option>
+            <option>A Pho Love Story </option>
+            <option>A Prince on Paper </option>
+            <option>A Princess in Theory </option>
+            <option>A Promise of Fire </option>
+            <option>A Quick Bite </option>
+            <option>A Rogue by Any Other Name </option>
+            <option>A Rogue of One's Own </option>
+            <option>A Room with a View </option>
+            <option>A Scot in the Dark </option>
+            <option>A Thousand Boy Kisses </option>
+            <option>A Thousand Pieces of You </option>
+            <option>A Torch Against the Night </option>
+            <option>A Touch of Darkness </option>
+            <option>A Very Large Expanse of Sea </option>
+            <option>A Walk to Remember </option>
+            <option>A Wallflower Christmas </option>
+            <option>A Week to Be Wicked </option>
+            <option>A Court of Silver Flames </option>
+            <option>About That Night </option>
+            <option>Accidentally Engaged </option>
+            <option>Acheron </option>
+            <option>Across the Universe </option>
+            <option>Act Like It </option>
+            <option>Act Your Age, Eve Brown </option>
+            <option>Addicted for Now </option>
+            <option>Addicted to You </option>
+            <option>After </option>
+            <option>After Ever Happy </option>
+            <option>After I Do </option>
+            <option>After We Collided </option>
+            <option>After We Fell </option>
+            <option>After You </option>
+            <option>Again the Magic </option>
+            <option>Agnes and the Hitman </option>
+            <option>Ain't She Sweet? </option>
+            <option>Alex, Approximately </option>
+            <option>All Rhodes Lead Here </option>
+            <option>All Together Dead </option>
+            <option>All Your Perfects </option>
+            <option>All the Bright Places </option>
+            <option>All the Feels </option>
+            <option>Allegiant </option>
+            <option>Almost Heaven </option>
+            <option>Alone With You in the Ether </option>
+            <option>Along for the Ride </option>
+            <option>Always Only You </option>
+            <option>Always and Forever, Lara Jean </option>
+            <option>American Queen </option>
+            <option>American Royals </option>
+            <option>Amy & Roger's Epic Detour </option>
+            <option>An Abundance of Katherines </option>
+            <option>An Echo in the Bone </option>
+            <option>An Ember in the Ashes </option>
+            <option>An Enchantment of Ravens </option>
+            <option>An Extraordinary Union </option>
+            <option>An Offer From a Gentleman </option>
+            <option>Angelfall </option>
+            <option>Angels Fall </option>
+            <option>Angels' Blood </option>
+            <option>Anna Dressed in Blood </option>
+            <option>Anna Karenina </option>
+            <option>Anna and the French Kiss </option>
+            <option>Any Duchess Will Do </option>
+            <option>Anyone But You </option>
+            <option>Arabella </option>
+            <option>Archangel's Consort </option>
+            <option>Archangel's Kiss </option>
+            <option>Archer's Voice </option>
+            <option>Aristotle and Dante Discover the Secrets of the Universe </option>
+            <option>Aristotle and Dante Dive into the Waters of the World </option>
+            <option>At First Sight </option>
+            <option>At Grave's End </option>
+            <option>Atonement </option>
+            <option>Attachments </option>
+            <option>Austenland </option>
+            <option>Autoboyography </option>
+            <option>Ayesha at Last </option>
+            <option>Backstage Pass </option>
+            <option>Barbarian Alien </option>
+            <option>Barbarian Lover </option>
+            <option>Bared to You </option>
+            <option>Battle Royal </option>
+            <option>Be with Me </option>
+            <option>Beach Read </option>
+            <option>Beard Science </option>
+            <option>Beard in Mind </option>
+            <option>Beastly </option>
+            <option>Beautiful Bastard </option>
+            <option>Beautiful Bitch </option>
+            <option>Beautiful Creatures </option>
+            <option>Beautiful Darkness </option>
+            <option>Beautiful Disaster </option>
+            <option>Beautiful Oblivion </option>
+            <option>Beautiful Player </option>
+            <option>Beautiful Secret </option>
+            <option>Beautiful Stranger </option>
+            <option>Beautiful World, Where Are You </option>
+            <option>Beauty and the Blacksmith  </option>
+            <option>Beauty and the Mustache </option>
+            <option>Beauty from Pain </option>
+            <option>Beauty: A Retelling of the Story of Beauty and the Beast </option>
+            <option>Because of Low </option>
+            <option>Because of Miss Bridgerton </option>
+            <option>Bed of Roses </option>
+            <option>Before I Fall </option>
+            <option>Before Jamaica Lane </option>
+            <option>Before We Were Strangers </option>
+            <option>Below Zero </option>
+            <option>Bet Me </option>
+            <option>Betrayed </option>
+            <option>Better Than the Movies </option>
+            <option>Beyond the Highland Mist </option>
+            <option>Big Rock </option>
+            <option>Birthday Girl </option>
+            <option>Bitten </option>
+            <option>Bittersweet </option>
+            <option>Black Hills </option>
+            <option>Black Rose </option>
+            <option>Blackmoore </option>
+            <option>Blameless </option>
+            <option>Blood Bound </option>
+            <option>Blood Brothers </option>
+            <option>Blood Promise </option>
+            <option>Bloodfever </option>
+            <option>Bloodlines </option>
+            <option>Bloom </option>
+            <option>Blue Dahlia </option>
+            <option>Blue Lily, Lily Blue </option>
+            <option>Blue-Eyed Devil </option>
+            <option>Blurred Lines </option>
+            <option>Bombshell </option>
+            <option>Book Lovers </option>
+            <option>Born in Fire </option>
+            <option>Born in Ice </option>
+            <option>Born in Shame </option>
+            <option>Bossman </option>
+            <option>Bound by Honor </option>
+            <option>Boy Meets Boy </option>
+            <option>Boyfriend Material </option>
+            <option>Boyfriend Material </option>
+            <option>Branded by Fire </option>
+            <option>Brazen and the Beast </option>
+            <option>Breaking Dawn </option>
+            <option>Breathe </option>
+            <option>Breathe </option>
+            <option>Bridget Jones's Diary </option>
+            <option>Bridget Jones: The Edge of Reason </option>
+            <option>Bright Side </option>
+            <option>Bringing Down the Duke </option>
+            <option>Broken Prince </option>
+            <option>Brutal Prince </option>
+            <option>Bully </option>
+            <option>Burn for Me </option>
+            <option>By Your Side </option>
+            <option>By a Thread </option>
+            <option>By the Book </option>
+            <option>Call Me By Your Name </option>
+            <option>Call Me Irresistible </option>
+            <option>Can You Keep a Secret? </option>
+            <option>Captivated by You </option>
+            <option>Captive Prince </option>
+            <option>Captive Prince: Volume Two </option>
+            <option>Captive in the Dark </option>
+            <option>Caraval </option>
+            <option>Caressed by Ice </option>
+            <option>Carolina Moon </option>
+            <option>Carry On </option>
+            <option>Catching Fire </option>
+            <option>Catching Jordan </option>
+            <option>Cemetery Boys </option>
+            <option>Chain Reaction </option>
+            <option>Champion </option>
+            <option>Changeless </option>
+            <option>Chasing Cassandra </option>
+            <option>Chasing Fire </option>
+            <option>Checkmate </option>
+            <option>Checkmate </option>
+            <option>Chesapeake Blue </option>
+            <option>China Rich Girlfriend </option>
+            <option>Chocolat </option>
+            <option>Christmas Eve at Friday Harbor </option>
+            <option>Cinder </option>
+            <option>City of Ashes </option>
+            <option>City of Bones </option>
+            <option>City of Fallen Angels </option>
+            <option>City of Glass </option>
+            <option>City of Heavenly Fire </option>
+            <option>City of Lost Souls </option>
+            <option>Clockwork Angel </option>
+            <option>Clockwork Prince </option>
+            <option>Clockwork Princess </option>
+            <option>Club Dead </option>
+            <option>Cold-Hearted Rake </option>
+            <option>Collide </option>
+            <option>Come Away with Me </option>
+            <option>Confess </option>
+            <option>Confessions of a Shopaholic </option>
+            <option>Conventionally Yours </option>
+            <option>Conversations with Friends </option>
+            <option>Corrupt </option>
+            <option>Cotillion </option>
+            <option>Count Your Lucky Stars </option>
+            <option>Counting Down with You </option>
+            <option>Covet </option>
+            <option>Crash </option>
+            <option>Crave </option>
+            <option>Crazy Rich Asians </option>
+            <option>Crazy Stupid Bromance </option>
+            <option>Credence </option>
+            <option>Crescendo </option>
+            <option>Cress </option>
+            <option>Crooked Kingdom </option>
+            <option>Crossed </option>
+            <option>Crown of Midnight </option>
+            <option>Cruel Beauty </option>
+            <option>Cry Wolf </option>
+            <option>Daisy Jones & The Six </option>
+            <option>Dance Upon the Air </option>
+            <option>Dance of Thieves </option>
+            <option>Dance of the Gods </option>
+            <option>Dance with the Devil </option>
+            <option>Dancing at Midnight </option>
+            <option>Dare You To </option>
+            <option>Daring to Dream </option>
+            <option>Dark Desires After Dusk </option>
+            <option>Dark Lover </option>
+            <option>Dark Needs at Night's Edge </option>
+            <option>Dark Prince </option>
+            <option>Dark Witch </option>
+            <option>Darkfever </option>
+            <option>Dash & Lily's Book of Dares </option>
+            <option>Dating Dr. Dil </option>
+            <option>Dating You / Hating You </option>
+            <option>Dating-ish </option>
+            <option>Daughter of Smoke & Bone </option>
+            <option>Daughter of the Forest  </option>
+            <option>Daughter of the Pirate King </option>
+            <option>Days of Blood & Starlight </option>
+            <option>Dead Reckoning </option>
+            <option>Dead Until Dark </option>
+            <option>Dead and Gone </option>
+            <option>Dead as a Doornail </option>
+            <option>Dead in the Family </option>
+            <option>Dead to the World </option>
+            <option>Dear Aaron </option>
+            <option>Dear Ava </option>
+            <option>Dear John </option>
+            <option>Deep </option>
+            <option>Definitely Dead </option>
+            <option>Delilah Green Doesn't Care </option>
+            <option>Delirium </option>
+            <option>Demon from the Dark </option>
+            <option>Desperate Duchesses </option>
+            <option>Desperate Measures </option>
+            <option>Destined for an Early Grave </option>
+            <option>Destroy Me </option>
+            <option>Devil in Spring </option>
+            <option>Devil in Winter </option>
+            <option>Devil's Bride </option>
+            <option>Devil's Cub </option>
+            <option>Devil's Daughter </option>
+            <option>Dial A for Aunties </option>
+            <option>Dirty </option>
+            <option>Dirty Letters </option>
+            <option>Dirty Rowdy Thing </option>
+            <option>Divergent </option>
+            <option>Do You Want to Start a Scandal </option>
+            <option>Don't You Forget About Me </option>
+            <option>Down London Road </option>
+            <option>Down to You </option>
+            <option>Dragon Actually </option>
+            <option>Dragon Bound </option>
+            <option>Dragonfly in Amber </option>
+            <option>Dream a Little Dream </option>
+            <option>Dreamfever </option>
+            <option>Dreaming of You </option>
+            <option>Dreams of Gods & Monsters </option>
+            <option>Driven </option>
+            <option>Drums of Autumn </option>
+            <option>Dumplin' </option>
+            <option>Easy </option>
+            <option>Eat, Pray, Love </option>
+            <option>Edenbrooke </option>
+            <option>Effortless </option>
+            <option>Egomaniac </option>
+            <option>Eleanor & Park </option>
+            <option>Electric Idol </option>
+            <option>Elements of Chemistry: Attraction </option>
+            <option>Eleven Scandals to Start to Win a Duke's Heart </option>
+            <option>Eligible: A Modern Retelling of Pride & Prejudice </option>
+            <option>Eliza and Her Monsters </option>
+            <option>Ella Enchanted </option>
+            <option>Emergency Contact </option>
+            <option>Emma </option>
+            <option>Empire of Storms </option>
+            <option>Entwined with You </option>
+            <option>Evermore </option>
+            <option>Every Day </option>
+            <option>Every Summer After </option>
+            <option>Everything Leads to You </option>
+            <option>Everything, Everything </option>
+            <option>Evvie Drake Starts Over </option>
+            <option>Face the Fire </option>
+            <option>Faking It </option>
+            <option>Faking It </option>
+            <option>Fallen </option>
+            <option>Fallen Crest High </option>
+            <option>Fallen Too Far </option>
+            <option>Falling into You </option>
+            <option>Fangirl </option>
+            <option>Fangirl </option>
+            <option>Fangs </option>
+            <option>Fantasy Lover </option>
+            <option>Far From the Madding Crowd </option>
+            <option>Felix Ever After </option>
+            <option>Feral Sins </option>
+            <option>Field Notes on Love </option>
+            <option>Fifty Shades Darker </option>
+            <option>Fifty Shades Freed </option>
+            <option>Fifty Shades of Grey </option>
+            <option>Fight or Flight </option>
+            <option>Finale </option>
+            <option>Finale </option>
+            <option>Finding Cinderella </option>
+            <option>Finding the Dream </option>
+            <option>Fire </option>
+            <option>Firelight </option>
+            <option>First Comes Scandal </option>
+            <option>First Drop of Crimson </option>
+            <option>First Grave on the Right </option>
+            <option>Five Feet Apart </option>
+            <option>Fix Her Up </option>
+            <option>Fixed on You </option>
+            <option>Flat-Out Love </option>
+            <option>Flipped </option>
+            <option>Float Plan </option>
+            <option>Flock </option>
+            <option>Flowers from the Storm </option>
+            <option>Forbidden </option>
+            <option>Forever </option>
+            <option>Forever My Girl </option>
+            <option>Forever Too Far </option>
+            <option>Frankly in Love </option>
+            <option>Frederica </option>
+            <option>Friends Without Benefits </option>
+            <option>Frigid </option>
+            <option>From Blood and Ash </option>
+            <option>From Dead to Worse </option>
+            <option>From Lukov with Love </option>
+            <option>Frostbite </option>
+            <option>Full Tilt </option>
+            <option>Funny You Should Ask </option>
+            <option>Gabriel's Inferno </option>
+            <option>Gabriel's Rapture </option>
+            <option>Garden Spells </option>
+            <option>Geekerella </option>
+            <option>Gentle Rogue </option>
+            <option>Get a Life, Chloe Brown </option>
+            <option>Girl Gone Viral </option>
+            <option>Glass Sword </option>
+            <option>Glory in Death </option>
+            <option>Gone with the Wind </option>
+            <option>Good Boy </option>
+            <option>Good Girl Complex </option>
+            <option>Graceling </option>
+            <option>Grave Mercy </option>
+            <option>Grey </option>
+            <option>Grin and Beard It </option>
+            <option>Guilty Pleasures </option>
+            <option>Half-Blood </option>
+            <option>Halfway to the Grave </option>
+            <option>Hands Down </option>
+            <option>Hang the Moon </option>
+            <option>Hani and Ishu's Guide to Fake Dating </option>
+            <option>Happily Ever After </option>
+            <option>Happy Ever After </option>
+            <option>Hate Notes </option>
+            <option>Hate to Want You </option>
+            <option>Heart Bones </option>
+            <option>Heart of the Sea </option>
+            <option>Heartless </option>
+            <option>Hearts in Darkness </option>
+            <option>Heartstopper: Volume Four </option>
+            <option>Heartstopper: Volume One </option>
+            <option>Heartstopper: Volume Three </option>
+            <option>Heartstopper: Volume Two </option>
+            <option>Heaven and Earth </option>
+            <option>Heaven, Texas </option>
+            <option>Heir of Fire </option>
+            <option>Hello Stranger </option>
+            <option>Her Royal Highness </option>
+            <option>Hero </option>
+            <option>Hex Hall </option>
+            <option>Hideaway </option>
+            <option>Him </option>
+            <option>History Is All You Left Me </option>
+            <option>Holding Up the Universe </option>
+            <option>Holding the Dream </option>
+            <option>Honey Girl </option>
+            <option>Honor's Splendour </option>
+            <option>Hook, Line, and Sinker </option>
+            <option>Hooked </option>
+            <option>Hopeless </option>
+            <option>Hostage to Pleasure </option>
+            <option>Hothouse Flower </option>
+            <option>House of Earth and Blood </option>
+            <option>House of Sky and Breath </option>
+            <option>How to Fail at Flirting </option>
+            <option>How to Marry a Marquis </option>
+            <option>How to Walk Away </option>
+            <option>Howl's Moving Castle </option>
+            <option>Hunting Ground </option>
+            <option>Husband Material </option>
+            <option>Hush, Hush </option>
+            <option>I Capture the Castle </option>
+            <option>I Kissed Shara Wheeler </option>
+            <option>I Owe You One </option>
+            <option>I Wish You All the Best </option>
+            <option>I'd Tell You I Love You, But Then I'd Have to Kill You </option>
+            <option>I'll Give You the Sun </option>
+            <option>I've Got Your Number </option>
+            <option>Ice Planet Barbarians </option>
+            <option>Idol </option>
+            <option>If I Never Met You </option>
+            <option>If I Stay </option>
+            <option>If This Gets Out </option>
+            <option>If the Shoe Fits </option>
+            <option>Ignite Me </option>
+            <option>Illuminae </option>
+            <option>Immortal in Death </option>
+            <option>In Bed with a Highlander </option>
+            <option>In Five Years </option>
+            <option>In Flight </option>
+            <option>In a Holidaze </option>
+            <option>Inner Harbor </option>
+            <option>Instructions for Dancing </option>
+            <option>Insurgent </option>
+            <option>Intercepted </option>
+            <option>Iron Kissed </option>
+            <option>Isla and the Happily Ever After </option>
+            <option>Isn't It Bromantic? </option>
+            <option>It Ain't Me, Babe </option>
+            <option>It Ends with Us </option>
+            <option>It Had to Be You </option>
+            <option>It Happened One Autumn </option>
+            <option>It Happened One Summer </option>
+            <option>It Starts with Us </option>
+            <option>It Takes Two to Tumble </option>
+            <option>It's Not Summer Without You </option>
+            <option>It's in His Kiss </option>
+            <option>Jane Eyre </option>
+            <option>Jewels of the Sun </option>
+            <option>Josh and Hazel's Guide to Not Dating </option>
+            <option>Just Haven't Met You Yet </option>
+            <option>Just Last Night </option>
+            <option>Just Like Heaven </option>
+            <option>Just Listen </option>
+            <option>Just One Day </option>
+            <option>Just One Year </option>
+            <option>Just the Sexiest Man Alive </option>
+            <option>Key of Knowledge </option>
+            <option>Key of Light </option>
+            <option>Key of Valor </option>
+            <option>King </option>
+            <option>King of Battle and Blood </option>
+            <option>King's Cage </option>
+            <option>Kingdom of Ash </option>
+            <option>Kingdom of the Wicked </option>
+            <option>Kings Rising </option>
+            <option>Kiss an Angel </option>
+            <option>Kiss of Midnight </option>
+            <option>Kiss of Snow </option>
+            <option>Kiss of Steel </option>
+            <option>Kiss of a Demon King </option>
+            <option>Kiss of the Highlander </option>
+            <option>Kiss of the Night </option>
+            <option>Kiss the Sky </option>
+            <option>Knight </option>
+            <option>Kulti </option>
+            <option>Kushiel's Dart </option>
+            <option>Lady Chatterley's Lover </option>
+            <option>Lady Isabella's Scandalous Marriage </option>
+            <option>Lady Luck </option>
+            <option>Lady Midnight </option>
+            <option>Lady Sophia's Lover </option>
+            <option>Landline </option>
+            <option>Last Night at the Telegraph Club </option>
+            <option>Last Sacrifice </option>
+            <option>Law Man </option>
+            <option>Layla </option>
+            <option>Lead </option>
+            <option>Leah on the Offbeat </option>
+            <option>Leaving Paradise </option>
+            <option>Legend </option>
+            <option>Legendary </option>
+            <option>Leo </option>
+            <option>Let it Snow </option>
+            <option>Let's Talk About Love </option>
+            <option>Letters to the Lost </option>
+            <option>Lick </option>
+            <option>Life's Too Short </option>
+            <option>Like Water for Chocolate </option>
+            <option>Linger </option>
+            <option>Little Women </option>
+            <option>Living Dead in Dallas </option>
+            <option>Lock and Key </option>
+            <option>Lola and the Boy Next Door </option>
+            <option>Lolita </option>
+            <option>Long Shot </option>
+            <option>Looking for Alaska </option>
+            <option>Lord of Scoundrels </option>
+            <option>Lord of Shadows </option>
+            <option>Lord of the Fading Lands </option>
+            <option>Lore Olympus: Volume One </option>
+            <option>Losing Hope </option>
+            <option>Losing It </option>
+            <option>Lothaire </option>
+            <option>Love & Gelato </option>
+            <option>Love & Other Disasters </option>
+            <option>Love From A to Z </option>
+            <option>Love Hacked </option>
+            <option>Love Her or Lose Her </option>
+            <option>Love Irresistibly </option>
+            <option>Love Lettering </option>
+            <option>Love Only Once </option>
+            <option>Love Story </option>
+            <option>Love Unscripted </option>
+            <option>Love and Other Words </option>
+            <option>Love in the Afternoon </option>
+            <option>Love in the Time of Cholera </option>
+            <option>Love on the Brain </option>
+            <option>Love, Rosie </option>
+            <option>Lovely War </option>
+            <option>Lover Avenged </option>
+            <option>Lover Awakened </option>
+            <option>Lover Enshrined </option>
+            <option>Lover Eternal </option>
+            <option>Lover Mine </option>
+            <option>Lover Reborn </option>
+            <option>Lover Revealed </option>
+            <option>Lover Unbound </option>
+            <option>Lover Unleashed </option>
+            <option>Lover at Last </option>
+            <option>Luna and the Lie </option>
+            <option>Magic Bites </option>
+            <option>Magic Bleeds </option>
+            <option>Magic Slays </option>
+            <option>Magic Study </option>
+            <option>Making Faces </option>
+            <option>Malibu Rising </option>
+            <option>Managed </option>
+            <option>Mansfield Park </option>
+            <option>Marked </option>
+            <option>Marriage for One </option>
+            <option>Married by Morning </option>
+            <option>Marrying Winterborne </option>
+            <option>Master of Crows </option>
+            <option>Match Me If You Can </option>
+            <option>Matched </option>
+            <option>Maybe Not </option>
+            <option>Maybe Someday </option>
+            <option>Maybe in Another Life </option>
+            <option>Me Before You </option>
+            <option>Meet Cute </option>
+            <option>Meet Me in the Margins </option>
+            <option>Memoirs of a Geisha </option>
+            <option>Message in a Bottle </option>
+            <option>Midnight Bayou </option>
+            <option>Midnight Sun </option>
+            <option>Midnight Sun  </option>
+            <option>Mine Till Midnight </option>
+            <option>Mine to Possess </option>
+            <option>Minx </option>
+            <option>Mockingjay </option>
+            <option>Montana Sky </option>
+            <option>Moon Called </option>
+            <option>Morrigan's Cross </option>
+            <option>Motorcycle Man </option>
+            <option>Mr. Cavendish, I Presume </option>
+            <option>Mr. Perfect </option>
+            <option>Mr. Wrong Number </option>
+            <option>Much Ado About You </option>
+            <option>My Favorite Half-Night Stand </option>
+            <option>My Favorite Mistake </option>
+            <option>My Killer Vacation </option>
+            <option>My Lady Jane </option>
+            <option>My Life Next Door </option>
+            <option>My Not So Perfect Life </option>
+            <option>My True Love Gave to Me: Twelve Holiday Stories </option>
+            <option>Mystery Man </option>
+            <option>Naked </option>
+            <option>Naked in Death </option>
+            <option>Natural Born Charmer </option>
+            <option>Neanderthal Seeks Human </option>
+            <option>Neon Gods </option>
+            <option>Never Judge a Lady by Her Cover </option>
+            <option>Never Let Me Go </option>
+            <option>Never Love a Highlander </option>
+            <option>Never Never </option>
+            <option>Never Never: Part Two </option>
+            <option>Never Seduce a Scot </option>
+            <option>Never Too Far </option>
+            <option>New Moon </option>
+            <option>Nick & Norah's Infinite Playlist </option>
+            <option>Night Embrace </option>
+            <option>Night Play </option>
+            <option>Night Pleasures </option>
+            <option>Nights in Rodanthe </option>
+            <option>Nine Rules to Break When Romancing a Rake </option>
+            <option>No Good Duke Goes Unpunished </option>
+            <option>No Rest for the Wicked </option>
+            <option>Nobody's Baby But Mine </option>
+            <option>Normal People </option>
+            <option>North and South </option>
+            <option>Northanger Abbey </option>
+            <option>Northern Lights </option>
+            <option>Norwegian Wood </option>
+            <option>November 9 </option>
+            <option>Obsidian </option>
+            <option>On Dublin Street </option>
+            <option>On the Edge </option>
+            <option>On the Fence </option>
+            <option>On the Island </option>
+            <option>On the Way to the Wedding </option>
+            <option>Once Burned </option>
+            <option>Once Ghosted, Twice Shy </option>
+            <option>Once Upon a Broken Heart </option>
+            <option>Once Upon a Winter's Eve </option>
+            <option>Once and Always </option>
+            <option>Once and for All </option>
+            <option>One Dance with a Duke </option>
+            <option>One Day </option>
+            <option>One Day in December </option>
+            <option>One Foot in the Grave </option>
+            <option>One Good Earl Deserves a Lover </option>
+            <option>One Last Stop </option>
+            <option>One Plus One </option>
+            <option>One True Loves </option>
+            <option>One Week Girlfriend </option>
+            <option>One for the Money </option>
+            <option>One of Us Is Lying </option>
+            <option>One to Watch </option>
+            <option>One with You </option>
+            <option>Only Mostly Devastated </option>
+            <option>Only When It's Us </option>
+            <option>Onyx </option>
+            <option>Opal </option>
+            <option>Opposite of Always </option>
+            <option>Opposition </option>
+            <option>Origin </option>
+            <option>Outlander </option>
+            <option>Own the Wind </option>
+            <option>P.S. I Like You </option>
+            <option>P.S. I Love You </option>
+            <option>P.S. I Still Love You </option>
+            <option>Pandemonium </option>
+            <option>Paper Princess </option>
+            <option>Paper Towns </option>
+            <option>Paradise </option>
+            <option>Part of Your World </option>
+            <option>Party of Two </option>
+            <option>Payback's a Witch </option>
+            <option>People We Meet on Vacation </option>
+            <option>Perfect </option>
+            <option>Perfect Chemistry </option>
+            <option>Perfect on Paper </option>
+            <option>Perfection </option>
+            <option>Persuasion </option>
+            <option>Pestilence </option>
+            <option>Play </option>
+            <option>Play of Passion </option>
+            <option>Playing for Keeps </option>
+            <option>Pleasure Unbound </option>
+            <option>Pleasure of a Dark Prince </option>
+            <option>Point of Retreat </option>
+            <option>Poison Study </option>
+            <option>Polaris Rising </option>
+            <option>Portrait of a Scotsman </option>
+            <option>Practice Makes Perfect </option>
+            <option>Pretty Reckless </option>
+            <option>Pride </option>
+            <option>Pride and Prejudice </option>
+            <option>Pride, Prejudice, and Other Flavors </option>
+            <option>Priest </option>
+            <option>Prodigy </option>
+            <option>Pucked </option>
+            <option>Pumpkinheads </option>
+            <option>Punk 57 </option>
+            <option>Pushing the Limits </option>
+            <option>Queen of Shadows </option>
+            <option>Radiance </option>
+            <option>Rafe </option>
+            <option>Rainshadow Road </option>
+            <option>Ransom </option>
+            <option>Rapture </option>
+            <option>Ravished </option>
+            <option>Reached </option>
+            <option>Real </option>
+            <option>Reaper's Property </option>
+            <option>Reason to Breathe </option>
+            <option>Rebecca </option>
+            <option>Reckless </option>
+            <option>Red Lily </option>
+            <option>Red Queen </option>
+            <option>Red, White & Royal Blue </option>
+            <option>Redeeming Love </option>
+            <option>Reflected in You </option>
+            <option>Regretting You </option>
+            <option>Release Me </option>
+            <option>Remember Me? </option>
+            <option>Reminders of Him </option>
+            <option>Requiem </option>
+            <option>Restore Me </option>
+            <option>Rhapsodic </option>
+            <option>Rhythm, Chord & Malykhin </option>
+            <option>Rich People Problems </option>
+            <option>Ricochet </option>
+            <option>Rising Tides </option>
+            <option>Rival </option>
+            <option>Rock Chick </option>
+            <option>Rock Chick Rescue </option>
+            <option>Romancing Mister Bridgerton </option>
+            <option>Romancing the Duke </option>
+            <option>Romeo and Juliet </option>
+            <option>RoomHate </option>
+            <option>Roomies </option>
+            <option>Rosaline Palmer Takes the Cake </option>
+            <option>Royal Holiday </option>
+            <option>Royally Matched </option>
+            <option>Royally Screwed </option>
+            <option>Royals </option>
+            <option>Rubinrot </option>
+            <option>Ruckus </option>
+            <option>Ruin and Rising </option>
+            <option>Rule </option>
+            <option>Rules of Attraction </option>
+            <option>Rush </option>
+            <option>Rusty Nailed </option>
+            <option>Safe Haven </option>
+            <option>Saint Anything </option>
+            <option>Saphirblau </option>
+            <option>Saving Grace </option>
+            <option>Savor the Moment </option>
+            <option>Say Yes to the Marquess </option>
+            <option>Scandal in Spring </option>
+            <option>Scandalous </option>
+            <option>Scarlet </option>
+            <option>Sea Swept </option>
+            <option>Second Chance Summer </option>
+            <option>Second First Impressions </option>
+            <option>Secrets of a Summer Night </option>
+            <option>Seduce Me at Sunrise </option>
+            <option>Seduction and Snacks </option>
+            <option>Seduction of a Highland Lass </option>
+            <option>Seize the Night </option>
+            <option>Sense and Sensibility </option>
+            <option>Serpent & Dove </option>
+            <option>Set on You </option>
+            <option>Seven Days in June </option>
+            <option>Shades of Milk and Honey </option>
+            <option>Shadow Kiss </option>
+            <option>Shadow Spell </option>
+            <option>Shadow and Bone </option>
+            <option>Shadow of Night </option>
+            <option>Shadowfever </option>
+            <option>Shatter Me </option>
+            <option>She Drives Me Crazy </option>
+            <option>She Gets the Girl </option>
+            <option>Shelter Mountain </option>
+            <option>Shipped </option>
+            <option>Shiver </option>
+            <option>Siege and Storm </option>
+            <option>Silence </option>
+            <option>Silver Borne </option>
+            <option>Simon vs. the Homo Sapiens Agenda </option>
+            <option>Simply Irresistible </option>
+            <option>Since You've Been Gone </option>
+            <option>Sins & Needles </option>
+            <option>Six of Crows </option>
+            <option>Slammed </option>
+            <option>Slave to Sensation </option>
+            <option>Slightly Dangerous </option>
+            <option>Slightly Married </option>
+            <option>Slippery Creatures </option>
+            <option>Smaragdgrün </option>
+            <option>Smooth Talking Stranger </option>
+            <option>Someone Like You </option>
+            <option>Someone to Watch Over Me </option>
+            <option>Something About You </option>
+            <option>Something Blue </option>
+            <option>Something Borrowed </option>
+            <option>Something Wilder </option>
+            <option>Something Wonderful </option>
+            <option>Something to Talk About </option>
+            <option>Sorcery of Thorns </option>
+            <option>Soulless </option>
+            <option>Sparrow </option>
+            <option>Spell of the Highlander </option>
+            <option>Spin the Dawn </option>
+            <option>Spirit Bound </option>
+            <option>Splendid </option>
+            <option>Spoiler Alert </option>
+            <option>Stalking Jack the Ripper </option>
+            <option>Starcrossed </option>
+            <option>Stardust </option>
+            <option>Stargirl </option>
+            <option>Starry Eyes </option>
+            <option>Stay with Me </option>
+            <option>Stepbrother Dearest </option>
+            <option>Still Me </option>
+            <option>Strange the Dreamer </option>
+            <option>Stuck with You </option>
+            <option>Stuck-Up Suit </option>
+            <option>Succubus Blues </option>
+            <option>Suddenly You </option>
+            <option>Sugar Daddy </option>
+            <option>Sustained </option>
+            <option>Swear on This Life </option>
+            <option>Sweet Dreams </option>
+            <option>Sweet Evil </option>
+            <option>Sweet Filthy Boy </option>
+            <option>Sweet Temptation </option>
+            <option>Sylvester </option>
+            <option>Take a Hint, Dani Brown </option>
+            <option>Tangled </option>
+            <option>Tears of the Moon </option>
+            <option>Tell Me Three Things </option>
+            <option>Tempt Me at Twilight </option>
+            <option>Tempting the Best Man </option>
+            <option>Ten Things I Love About You </option>
+            <option>Ten Tiny Breaths </option>
+            <option>Ten Ways to Be Adored When Landing a Lord </option>
+            <option>Terms and Conditions  </option>
+            <option>Tess of the D’Urbervilles </option>
+            <option>The 5th Wave </option>
+            <option>The Age of Innocence </option>
+            <option>The Air He Breathes </option>
+            <option>The American Roommate Experiment </option>
+            <option>The Assassin's Blade </option>
+            <option>The Baller </option>
+            <option>The Best Man </option>
+            <option>The Best Thing </option>
+            <option>The Best of Me </option>
+            <option>The Bird and the Sword </option>
+            <option>The Blue Castle </option>
+            <option>The Bodyguard </option>
+            <option>The Book of Life </option>
+            <option>The Bookish Life of Nina Hill </option>
+            <option>The Bookshop on the Corner </option>
+            <option>The Boy Next Door </option>
+            <option>The Boy Who Sneaks in My Bedroom Window </option>
+            <option>The Boyfriend Project </option>
+            <option>The Bride </option>
+            <option>The Bride Test </option>
+            <option>The Bridge Kingdom </option>
+            <option>The Bridgertons: Happily Ever After </option>
+            <option>The Bridges of Madison County </option>
+            <option>The Bromance Book Club </option>
+            <option>The Bronze Horseman </option>
+            <option>The Charm Offensive </option>
+            <option>The Chase </option>
+            <option>The Cheat Sheet </option>
+            <option>The Choice </option>
+            <option>The Coincidence of Callie & Kayden </option>
+            <option>The Countess Conspiracy </option>
+            <option>The Crown </option>
+            <option>The Cruel Prince </option>
+            <option>The DUFF: Designated Ugly Fat Friend </option>
+            <option>The Dare </option>
+            <option>The Dark Highlander </option>
+            <option>The Darkest Kiss </option>
+            <option>The Darkest Minds </option>
+            <option>The Darkest Night </option>
+            <option>The Darkest Temptation </option>
+            <option>The Dating Plan </option>
+            <option>The Day of the Duchess </option>
+            <option>The Dead Romantics </option>
+            <option>The Deal </option>
+            <option>The Distance Between Us </option>
+            <option>The Dream Thieves </option>
+            <option>The Duchess Deal </option>
+            <option>The Duchess War </option>
+            <option>The Duke Who Didn't </option>
+            <option>The Duke and I </option>
+            <option>The Duke and I </option>
+            <option>The Edge of Never </option>
+            <option>The Elite </option>
+            <option>The Ex Hex </option>
+            <option>The Ex Talk </option>
+            <option>The Falling in Love Montage </option>
+            <option>The Fastest Way to Fall </option>
+            <option>The Fault in Our Stars </option>
+            <option>The Fiery Cross </option>
+            <option>The Fill-In Boyfriend </option>
+            <option>The Fine Print </option>
+            <option>The Flatshare </option>
+            <option>The Friend Zone </option>
+            <option>The Friend Zone </option>
+            <option>The Gamble </option>
+            <option>The Game Plan </option>
+            <option>The Gentleman's Guide to Vice and Virtue </option>
+            <option>The Geography of You and Me </option>
+            <option>The Girl He Used to Know </option>
+            <option>The Girl You Left Behind </option>
+            <option>The Girl with the Make-Believe Husband </option>
+            <option>The Goal </option>
+            <option>The Golden Lily </option>
+            <option>The Governess Affair </option>
+            <option>The Governess Game </option>
+            <option>The Grand Sophy </option>
+            <option>The Great Gatsby </option>
+            <option>The Guardian </option>
+            <option>The Guernsey Literary and Potato Peel Pie Society </option>
+            <option>The Happy Ever After Playlist </option>
+            <option>The Hating Game </option>
+            <option>The Heart Principle </option>
+            <option>The Heart of Betrayal </option>
+            <option>The Heir </option>
+            <option>The Heiress Effect </option>
+            <option>The Henna Wars </option>
+            <option>The Highlander's Touch </option>
+            <option>The Highwayman </option>
+            <option>The Holiday Swap </option>
+            <option>The Hollow </option>
+            <option>The Honey-Don't List </option>
+            <option>The Hook Up </option>
+            <option>The Hooker and the Hermit </option>
+            <option>The Host </option>
+            <option>The House in the Cerulean Sea </option>
+            <option>The Hunger Games </option>
+            <option>The Immortal Highlander </option>
+            <option>The Indigo Spell </option>
+            <option>The Inheritance Games </option>
+            <option>The Intimacy Experiment </option>
+            <option>The Invisible Life of Addie LaRue </option>
+            <option>The Iron Daughter </option>
+            <option>The Iron Duke </option>
+            <option>The Iron King </option>
+            <option>The Iron Queen </option>
+            <option>The King </option>
+            <option>The Kiss Quotient </option>
+            <option>The Kiss Thief </option>
+            <option>The Kiss of Deception </option>
+            <option>The Lady's Guide to Celestial Mechanics </option>
+            <option>The Last Boyfriend </option>
+            <option>The Last Letter from Your Lover </option>
+            <option>The Last Song </option>
+            <option>The Legacy </option>
+            <option>The Light We Lost </option>
+            <option>The Longest Ride </option>
+            <option>The Lost Duke of Wyndham </option>
+            <option>The Love Hypothesis </option>
+            <option>The Love Hypothesis </option>
+            <option>The Lover's Dictionary </option>
+            <option>The Lucky One </option>
+            <option>The Luxe </option>
+            <option>The Maddest Obsession </option>
+            <option>The Madness of Lord Ian Mackenzie </option>
+            <option>The Magpie Lord </option>
+            <option>The Marriage Bargain </option>
+            <option>The Marriage Game </option>
+            <option>The Mighty Storm </option>
+            <option>The Mistake </option>
+            <option>The Next Always </option>
+            <option>The Night Circus </option>
+            <option>The No-Show </option>
+            <option>The Notebook </option>
+            <option>The Obsession </option>
+            <option>The One </option>
+            <option>The Opportunist </option>
+            <option>The Other Boleyn Girl </option>
+            <option>The Other Miss Bridgerton </option>
+            <option>The Pagan Stone </option>
+            <option>The Perfect Hope </option>
+            <option>The Perfect Play </option>
+            <option>The Phantom of the Opera </option>
+            <option>The Play </option>
+            <option>The Price of Salt </option>
+            <option>The Prince </option>
+            <option>The Prince and the Dressmaker </option>
+            <option>The Princess Bride </option>
+            <option>The Princess Diaries </option>
+            <option>The Princess Trap </option>
+            <option>The Prize </option>
+            <option>The Problem with Forever </option>
+            <option>The Proposal </option>
+            <option>The Proposal </option>
+            <option>The Proposition </option>
+            <option>The Queen of Nothing </option>
+            <option>The Queer Principles of Kit Webb </option>
+            <option>The Raven Boys </option>
+            <option>The Raven King </option>
+            <option>The Raven Prince </option>
+            <option>The Rescue </option>
+            <option>The Right Swipe </option>
+            <option>The Risk </option>
+            <option>The Risk </option>
+            <option>The Road Trip </option>
+            <option>The Rogue Not Taken </option>
+            <option>The Roommate </option>
+            <option>The Rose & the Dagger </option>
+            <option>The Rosie Effect </option>
+            <option>The Rosie Project </option>
+            <option>The Roughest Draft </option>
+            <option>The Royal We </option>
+            <option>The Score </option>
+            <option>The Scorpio Races </option>
+            <option>The Sea of Tranquility </option>
+            <option>The Search </option>
+            <option>The Secret </option>
+            <option>The Secret Diaries of Miss Miranda Cheever </option>
+            <option>The Secret History of the Pink Carnation </option>
+            <option>The Secret of Ella and Micha </option>
+            <option>The Secrets of Sir Richard Kenworthy </option>
+            <option>The Seven Husbands of Evelyn Hugo </option>
+            <option>The Shadows Between Us </option>
+            <option>The Silver Linings Playbook </option>
+            <option>The Simple Wild </option>
+            <option>The Siren </option>
+            <option>The Sisterhood of the Traveling Pants </option>
+            <option>The Sky Is Everywhere </option>
+            <option>The Soldier's Scoundrel </option>
+            <option>The Song of Achilles </option>
+            <option>The Song of Achilles </option>
+            <option>The Soulmate Equation </option>
+            <option>The Spanish Love Deception </option>
+            <option>The Statistical Probability of Love at First Sight </option>
+            <option>The Stopover </option>
+            <option>The Suffragette Scandal </option>
+            <option>The Sum of All Kisses </option>
+            <option>The Summer I Turned Pretty </option>
+            <option>The Summer of Broken Rules </option>
+            <option>The Sun Is Also a Star </option>
+            <option>The Sweet Gum Tree </option>
+            <option>The Sweetest Oblivion </option>
+            <option>The Sweetest Thing </option>
+            <option>The Switch </option>
+            <option>The Thorn Birds </option>
+            <option>The Time Traveler's Wife </option>
+            <option>The Tourist Attraction </option>
+            <option>The Trouble with Hating You </option>
+            <option>The Truth About Forever </option>
+            <option>The Two Lives of Lydia Bird </option>
+            <option>The Ugly Duchess </option>
+            <option>The Unbecoming of Mara Dyer </option>
+            <option>The Undomestic Goddess </option>
+            <option>The Unexpected Everything </option>
+            <option>The Unhoneymooners </option>
+            <option>The Unwanted Wife </option>
+            <option>The Upside of Falling </option>
+            <option>The Upside of Unrequited </option>
+            <option>The Villa </option>
+            <option>The Vincent Boys </option>
+            <option>The Viscount Who Loved Me </option>
+            <option>The Wall of Winnipeg and Me </option>
+            <option>The Wallflower Wager </option>
+            <option>The Warlord Wants Forever </option>
+            <option>The Wedding </option>
+            <option>The Wedding </option>
+            <option>The Wedding Crasher </option>
+            <option>The Wedding Date </option>
+            <option>The Wedding Party </option>
+            <option>The Wicked King </option>
+            <option>The Will </option>
+            <option>The Winner's Crime </option>
+            <option>The Winner's Curse </option>
+            <option>The Winner's Kiss </option>
+            <option>The Winter King </option>
+            <option>The Winter Sea </option>
+            <option>The Wisteria Society of Lady Scoundrels </option>
+            <option>The Witness </option>
+            <option>The Worst Best Man </option>
+            <option>The Wrath and the Dawn </option>
+            <option>The Year We Fell Down </option>
+            <option>The Crown of Gilded Bones </option>
+            <option>Then Came You </option>
+            <option>These Broken Stars </option>
+            <option>These Old Shades </option>
+            <option>These Violent Delights </option>
+            <option>They Both Die at the End </option>
+            <option>Things We Never Got Over </option>
+            <option>Things We Never Got Over </option>
+            <option>Things You Save in a Fire </option>
+            <option>This Girl </option>
+            <option>This Heart of Mine </option>
+            <option>This Is What Happy Looks Like </option>
+            <option>This Lullaby </option>
+            <option>This Man </option>
+            <option>This Side of the Grave </option>
+            <option>This Time Next Year </option>
+            <option>This is How You Lose the Time War </option>
+            <option>Thoughtless </option>
+            <option>Throttled </option>
+            <option>To All the Boys I've Loved Before </option>
+            <option>To Catch an Heiress </option>
+            <option>To Hate Adam Connor </option>
+            <option>To Have and to Hoax </option>
+            <option>To Kill a Kingdom </option>
+            <option>To Kill a Kingdom </option>
+            <option>To Love Jason Thorn </option>
+            <option>To Love and to Loathe </option>
+            <option>To Sir Phillip, With Love </option>
+            <option>To Sir, with Love </option>
+            <option>To Tame a Highland Warrior </option>
+            <option>Today Tonight Tomorrow </option>
+            <option>Tokyo Ever After </option>
+            <option>Too Late </option>
+            <option>Tools of Engagement </option>
+            <option>Top Secret </option>
+            <option>Torment </option>
+            <option>Tower of Dawn </option>
+            <option>Trade Me </option>
+            <option>Transcendence </option>
+            <option>True Believer </option>
+            <option>Truth or Beard </option>
+            <option>Turtles All the Way Down </option>
+            <option>Tweet Cute </option>
+            <option>Twenties Girl </option>
+            <option>Twice Tempted </option>
+            <option>Twice in a Blue Moon </option>
+            <option>Twilight </option>
+            <option>Twisted Lies </option>
+            <option>Twisted Love </option>
+            <option>Twisted Palace </option>
+            <option>Twisted Perfection </option>
+            <option>Uglies </option>
+            <option>Ugly Love </option>
+            <option>Under Locke </option>
+            <option>Under One Roof </option>
+            <option>Under the Never Sky </option>
+            <option>Under the Whispering Door </option>
+            <option>Under the Whispering Door </option>
+            <option>Undercover Bromance </option>
+            <option>Unearthly </option>
+            <option>Unravel Me </option>
+            <option>Until Friday Night </option>
+            <option>Until November </option>
+            <option>Until You </option>
+            <option>Unveiled </option>
+            <option>Uprooted </option>
+            <option>Us </option>
+            <option>Valley of Silence </option>
+            <option>Vampire Academy </option>
+            <option>Venetia </option>
+            <option>Verity </option>
+            <option>Vicious </option>
+            <option>Virgin River </option>
+            <option>Vision in White </option>
+            <option>Visions of Heat </option>
+            <option>Voyager </option>
+            <option>Wait for It </option>
+            <option>Wait for You </option>
+            <option>Waiting for Tom Hanks </option>
+            <option>Walking Disaster </option>
+            <option>Wallbanger </option>
+            <option>Warm Bodies </option>
+            <option>Warprize  </option>
+            <option>Water for Elephants </option>
+            <option>Wayward Son </option>
+            <option>We Were Liars </option>
+            <option>We'll Always Have Summer </option>
+            <option>We'll Always Have Summer </option>
+            <option>Weather Girl </option>
+            <option>Wedding Night </option>
+            <option>Welcome to Temptation </option>
+            <option>Well Matched </option>
+            <option>Well Met </option>
+            <option>Well Played </option>
+            <option>What Happened to Goodbye </option>
+            <option>What Happens in London </option>
+            <option>What I Did for Love </option>
+            <option>What If It's Us </option>
+            <option>When Beauty Tamed the Beast </option>
+            <option>When Dimple Met Rishi </option>
+            <option>When He Was Wicked </option>
+            <option>When a Scot Ties the Knot </option>
+            <option>Where She Went </option>
+            <option>Where the Crawdads Sing </option>
+            <option>While We Were Dating </option>
+            <option>White Hot </option>
+            <option>White Hot Kiss </option>
+            <option>Whitney, My Love </option>
+            <option>Wicked </option>
+            <option>Wicked Deeds on a Winter's Night </option>
+            <option>Wicked Intentions </option>
+            <option>Wicked Lovely </option>
+            <option>Wicked and the Wallflower </option>
+            <option>Wild Man </option>
+            <option>Wildest Dreams </option>
+            <option>Wildfire </option>
+            <option>Will Grayson, Will Grayson </option>
+            <option>Window Shopping </option>
+            <option>Winter </option>
+            <option>Wintersong </option>
+            <option>Without Merit </option>
+            <option>Wolfsong </option>
+            <option>Words in Deep Blue </option>
+            <option>World After </option>
+            <option>Worth Any Price </option>
+            <option>Would Like to Meet </option>
+            <option>Written in My Own Heart's Blood </option>
+            <option>Written in the Stars </option>
+            <option>Wrong </option>
+            <option>Wuthering Heights </option>
+            <option>XOXO </option>
+            <option>Yes No Maybe So </option>
+            <option>You Deserve Each Other </option>
+            <option>You Had Me at Hola </option>
+            <option>You Made a Fool of Death with Your Beauty </option>
+            <option>You Should See Me in a Crown </option>
+            <option>You've Reached Sam </option>
+          </select>
+        </div>
+        <input type="submit" value="Find Your Matches" id="get-recs-btn" class="btn btn-primary">
+      </form>
+    </div>
+  </section>
+  <!--Hero End-->
+  <!-- Javascript Files Start -->
+  <script src="/dist/bundle.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-*.min.js"></script>
+  <!-- Javascript Files End -->
+</body>
+</html>
