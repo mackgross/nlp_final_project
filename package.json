@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "firebase": "^9.15.0"
+  },
+  "name": "meet_cute",
+  "description": "Meet Cute is a web app that can be used to get recommendations for adult and young adult romance books. The user will enter the title of a book and the recommender will return similar titles that the user might enjoy.",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {
+    "firebase-tools": "^11.17.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mackgross/meet_cute.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mackgross/meet_cute/issues"
+  },
+  "homepage": "https://github.com/mackgross/meet_cute#readme"
+}
